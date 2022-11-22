@@ -1,6 +1,7 @@
 package dao;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -10,6 +11,16 @@ import model.Jugador;
 import model.Jugadores;
 
 public class Unmarshall {
+	ArrayList<Jugador> jugador =  new ArrayList<Jugador>();
+	
+	public ArrayList<Jugador> getJugador() {
+		return jugador;
+	}
+
+	public void setJugador(ArrayList<Jugador> jugador) {
+		this.jugador = jugador;
+	}
+
 	public void init() {
 		Jugadores jugadores = null;
 		try {
@@ -22,11 +33,13 @@ public class Unmarshall {
 		if (jugadores == null) System.out.println("Error");
 		else {
 			for (Jugador j : jugadores.getJugadores()) {
+				
 				System.out.println(j);
 			}
+			jugador.addAll(jugadores.getJugadores());
 		}
 	}
-	
+
 	private File ficheroEntrada() {
 		String rutaDirectorio = System.getProperty("user.dir");
 		String rutaFichero = rutaDirectorio  + File.separator + "resources" + File.separator
