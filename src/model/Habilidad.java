@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -11,9 +13,9 @@ public class Habilidad {
 	private int id;
 	private String nombre;
 	private String tipo;
-	private Atributo atributo;
+	private Atributo [] atributo = {};
 	
-	public Habilidad(int id, String nombre, String tipo, Atributo atributo) {
+	public Habilidad(int id, String nombre, String tipo, Atributo[] atributo) {
 		this.id = id;
 		this.nombre = nombre;
 		this.tipo = tipo;
@@ -53,18 +55,21 @@ public class Habilidad {
 	}
 
 	@XmlElement(name="atributo")
-	public Atributo getAtributo() {
+	public Atributo[] getAtributo() {
 		return atributo;
 	}
 
-	public void setAtributo(Atributo atributo) {
+	public void setAtributo(Atributo[] atributo) {
 		this.atributo = atributo;
 	}
 
 	@Override
 	public String toString() {
-		return "Habilidad [id=" + id + ", nombre=" + nombre + ", tipo=" + tipo + ", atributo=" + atributo + "]";
+		return "Habilidad [id=" + id + ", nombre=" + nombre + ", tipo=" + tipo + ", atributo="
+				+ Arrays.toString(atributo) + "]";
 	}
+
+	
 
 	
 	

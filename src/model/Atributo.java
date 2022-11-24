@@ -10,8 +10,9 @@ public class Atributo {
 	private String id;
 	private int value;
 
-	public Atributo(String id) {
+	public Atributo(int value,String id) {
 		this.id = id;
+		this.value = value;
 	}
 
 	public Atributo() {

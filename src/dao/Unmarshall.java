@@ -39,7 +39,7 @@ public class Unmarshall {
 			jugador.addAll(jugadores.getJugadores());
 		}
 	}
-
+	
 	private File ficheroEntrada() {
 		String rutaDirectorio = System.getProperty("user.dir");
 		String rutaFichero = rutaDirectorio  + File.separator + "resources" + File.separator
