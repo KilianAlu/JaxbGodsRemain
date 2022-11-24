@@ -51,9 +51,12 @@ public class Reader {
 				case 'A':
 					for(int i=0;i < listaJugador.size();i++) {
 						if(Integer.toString(listaJugador.get(i).getId()).equals(accion[1])) {
-							if(accion.length == 10) {
+							if(accion.length >9) {	
+								String nombre = "";
+								String elemento = "";
 								if(accion.length == 12) {
-									
+									 nombre = accion[3];
+									 elemento = accion [4];
 								}
 								Atributo PS = new Atributo(Integer.parseInt(accion[5]), "PS");
 								Atributo ATQ = new Atributo(Integer.parseInt(accion[6]), "ATQ");
@@ -63,13 +66,15 @@ public class Reader {
 								Atributo DEF = new Atributo(Integer.parseInt(accion[10]), "DEF");
 								Atributo SDEF = new Atributo(Integer.parseInt(accion[11]), "SDEF");
 								Atributo[] atributo = {PS, ATQ, SATQ, STA, VEL, DEF, SDEF};
-								Habilidad habilidad = new Habilidad(Integer.parseInt(accion[2]), accion[3], accion[4], atributo);
+								Habilidad habilidad = new Habilidad(Integer.parseInt(accion[2]), nombre, elemento, atributo);
+								listaJugador.get(i).getHabilidades().add(habilidad);
 								System.out.println("La habilidad ha sido añadida.");
 							}
 						}
 					}
 					break;
 				case 'S':
+					
 					break;
 				}
 			}

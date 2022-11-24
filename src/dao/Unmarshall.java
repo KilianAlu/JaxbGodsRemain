@@ -11,6 +11,8 @@ import model.Jugador;
 import model.Jugadores;
 
 public class Unmarshall {
+	File ficheroPantallas = new File (System.getProperty("user.dir") + File.separator + "resources" 
+			+ File.separator + "entrada.xml");
 	ArrayList<Jugador> jugador =  new ArrayList<Jugador>();
 	
 	public ArrayList<Jugador> getJugador() {
