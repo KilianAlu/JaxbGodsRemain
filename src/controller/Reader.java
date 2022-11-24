@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import dao.Marshall;
 import model.Atributo;
 import model.Habilidad;
 import model.Jugador;
@@ -13,6 +14,7 @@ import model.Jugador;
 public class Reader {
 	File ficheroAcciones = new File (System.getProperty("user.dir") + File.separator + "resources" 
 			+ File.separator + "acciones.txt");
+	
 	
 
 	public Reader(){
@@ -27,54 +29,55 @@ public class Reader {
 			
 			while((linia = br.readLine()) != null) { 
 				String[] accion = linia.split(" ");
+				int id;
 				switch (linia.charAt(0)) {
 				case 'P':
+					 id = Integer.parseInt(accion[1])-1;
 					System.out.println("Mostrando Personaje");
-					for(int i=0;i < listaJugador.size();i++) {
-						if(Integer.toString(listaJugador.get(i).getId()).equals(accion[1])) {
-							System.out.println(listaJugador.get(i));
-						}
-					}
+					System.out.println(listaJugador.get(id));
 					break;
 				case 'B':
-					for(int i=0;i < listaJugador.size();i++) {
-						if(Integer.toString(listaJugador.get(i).getId()).equals(accion[1])) {
-							for(int o=0;o<listaJugador.get(i).getHabilidades().size();o++) {
-								if(Integer.toString(listaJugador.get(i).getHabilidades().get(o).getId()).equals(accion[2])) {
-									listaJugador.get(i).getHabilidades().remove(o);
+					 id = Integer.parseInt(accion[1])-1;
+							for(int o=0;o<listaJugador.get(id).getHabilidades().size();o++) {
+								if(listaJugador.get(id).getHabilidades().get(o).getId() == Integer.parseInt(accion[2])) {
+									listaJugador.get(id).getHabilidades().remove(o);
 									System.out.println("Se ha eliminado la habilidad");
+									break;
 								}
 							}
-						}
-					}
 					break;
 				case 'A':
-					for(int i=0;i < listaJugador.size();i++) {
-						if(Integer.toString(listaJugador.get(i).getId()).equals(accion[1])) {
+					 id = Integer.parseInt(accion[1])-1;
 							if(accion.length >9) {	
 								String nombre = "";
 								String elemento = "";
+								int posicion = 0;
 								if(accion.length == 12) {
 									 nombre = accion[3];
 									 elemento = accion [4];
+									 posicion += 2;
 								}
-								Atributo PS = new Atributo(Integer.parseInt(accion[5]), "PS");
-								Atributo ATQ = new Atributo(Integer.parseInt(accion[6]), "ATQ");
-								Atributo SATQ = new Atributo(Integer.parseInt(accion[7]), "SATQ");
-								Atributo STA = new Atributo(Integer.parseInt(accion[8]), "STA");
-								Atributo VEL = new Atributo(Integer.parseInt(accion[9]), "VEL");
-								Atributo DEF = new Atributo(Integer.parseInt(accion[10]), "DEF");
-								Atributo SDEF = new Atributo(Integer.parseInt(accion[11]), "SDEF");
+								Atributo PS = new Atributo(Integer.parseInt(accion[posicion + 3]), "PS");
+								Atributo ATQ = new Atributo(Integer.parseInt(accion[posicion + 4]), "ATQ");
+								Atributo SATQ = new Atributo(Integer.parseInt(accion[posicion + 5]), "SATQ");
+								Atributo STA = new Atributo(Integer.parseInt(accion[posicion + 6]), "STA");
+								Atributo VEL = new Atributo(Integer.parseInt(accion[posicion + 7]), "VEL");
+								Atributo DEF = new Atributo(Integer.parseInt(accion[posicion + 8]), "DEF");
+								Atributo SDEF = new Atributo(Integer.parseInt(accion[posicion + 9]), "SDEF");
 								Atributo[] atributo = {PS, ATQ, SATQ, STA, VEL, DEF, SDEF};
 								Habilidad habilidad = new Habilidad(Integer.parseInt(accion[2]), nombre, elemento, atributo);
-								listaJugador.get(i).getHabilidades().add(habilidad);
-								System.out.println("La habilidad ha sido añadida.");
+								listaJugador.get(id).getHabilidades().add(habilidad);
+								System.out.println("La habilidad ha sido anadida.");
 							}
-						}
-					}
+							else {
+								System.out.println("Faltan Parametros");
+							}
+						
+					
 					break;
 				case 'S':
-					
+					Marshall marshall = new Marshall();
+					marshall.generarXml(listaJugador);
 					break;
 				}
 			}

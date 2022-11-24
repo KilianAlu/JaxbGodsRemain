@@ -11,7 +11,7 @@ import model.Jugador;
 import model.Jugadores;
 
 public class Unmarshall {
-	File ficheroPantallas = new File (System.getProperty("user.dir") + File.separator + "resources" 
+	File fichero = new File (System.getProperty("user.dir") + File.separator + "resources" 
 			+ File.separator + "entrada.xml");
 	ArrayList<Jugador> jugador =  new ArrayList<Jugador>();
 	
@@ -28,7 +28,7 @@ public class Unmarshall {
 		try {
 			JAXBContext context = JAXBContext.newInstance(Jugadores.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
-			jugadores = (Jugadores) unmarshaller.unmarshal(ficheroEntrada());
+			jugadores = (Jugadores) unmarshaller.unmarshal(fichero);
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
@@ -40,13 +40,5 @@ public class Unmarshall {
 			}
 			jugador.addAll(jugadores.getJugadores());
 		}
-	}
-	
-	private File ficheroEntrada() {
-		String rutaDirectorio = System.getProperty("user.dir");
-		String rutaFichero = rutaDirectorio  + File.separator + "resources" + File.separator
-				+ "entrada.xml";
-		File ficheroEntrada = new File(rutaFichero);
-		return ficheroEntrada;
 	}
 }
